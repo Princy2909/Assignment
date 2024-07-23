@@ -1,118 +1,141 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useState, useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import SplashScreen from './Screens/splash';
+import HomeScreen from './Screens/home';
+import SearchScreen from './Screens/search';
+import DetailsScreen from './Screens/details';
+import { Image } from 'react-native';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App = () => {
+  const [showSplash, setShowSplash] = useState(true);
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSplash(false);
+    }, 2000);
+  }, []);
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {showSplash ? (
+            <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
+          ) : (
+            <Stack.Screen name="HomeScreen" component={HomeTabs} options={{ headerShown: false }} />
+          )}
+          <Stack.Screen name="DetailsScreen" component={DetailsScreen} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
-}
+};
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+const HomeTabs = () => {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused }) => {
+          let iconName;
+
+          if (route.name === 'Home') {
+            iconName = focused ? require('./assets/home.png') : require('./assets/home.png');
+          } else if (route.name === 'Search') {
+            iconName = focused ? require('./assets/search.png') : require('./assets/search.png');
+          }
+
+          return (
+            <Image
+              source={iconName}
+              style={{
+                width: 24,
+                height: 24,
+                tintColor: focused ? '#FF3737' : '#8B0A1A', // red shades
+              }}
+            />
+          );
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          marginBottom: 5,
+          color: '#ccc', // light gray text
+        },
+        tabBarStyle: {
+          backgroundColor: '#141414', // dark background
+          borderTopWidth: 3,
+          borderTopColor: '#333', // dark gray border
+          padding:10,
+        },
+      })}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ focused }) => {
+            return (
+              <Image
+                source={focused ? require('./assets/home.png') : require('./assets/home2.png')}
+                style={{
+                  width: 24,
+                  height: 24,
+                  tintColor: focused ? '#E74C3C' : '#8B0A1A', // red shades
+                }}
+              />
+            );
+          },
+          headerStyle: {
+            backgroundColor: '#141414', // dark background
+            borderBottomWidth: 3,
+            borderBottomColor: '#333', // dark gray border
+          },
+          headerTintColor: '#ccc', // light gray text
+          headerTitleStyle: {
+            fontSize: 20,
+            fontWeight: 'bold',
+            color: '#ccc', // light gray text
+          },
+        }}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+      <Tab.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          tabBarLabel: 'Search',
+          tabBarIcon: ({ focused }) => {
+            return (
+              <Image
+                source={focused ? require('./assets/search1.png') : require('./assets/search.png')}
+                style={{
+                  width: 24,
+                  height: 24,
+                  tintColor: focused ? '#E74C3C' : '#8B0A1A', // red shades
+                }}
+              />
+            );
+          },
+          headerStyle: {
+            backgroundColor: '#141414', // dark background
+            borderBottomWidth: 1,
+            borderBottomColor: '#333', // dark gray border
+          },
+          headerTintColor: '#ccc', // light gray text
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            color: '#ccc', // light gray text
+          },
+        }}
+      />
+    </Tab.Navigator>
   );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+};
 
 export default App;
