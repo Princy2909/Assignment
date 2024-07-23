@@ -56,7 +56,7 @@ const HomeTabs = () => {
               style={{
                 width: 24,
                 height: 24,
-                tintColor: focused ? '#FF3737' : '#8B0A1A', // red shades
+                tintColor: focused ? '#FF3737' : '#8B0A1A',
               }}
             />
           );
@@ -64,12 +64,12 @@ const HomeTabs = () => {
         tabBarLabelStyle: {
           fontSize: 12,
           marginBottom: 5,
-          color: '#ccc', // light gray text
+          color: '#ccc',
         },
         tabBarStyle: {
-          backgroundColor: '#141414', // dark background
+          backgroundColor: '#141414',
           borderTopWidth: 3,
-          borderTopColor: '#333', // dark gray border
+          borderTopColor: '#333',
           padding:10,
         },
       })}
@@ -86,21 +86,21 @@ const HomeTabs = () => {
                 style={{
                   width: 24,
                   height: 24,
-                  tintColor: focused ? '#E74C3C' : '#8B0A1A', // red shades
+                  tintColor: focused ? '#E74C3C' : '#8B0A1A',
                 }}
               />
             );
           },
           headerStyle: {
-            backgroundColor: '#141414', // dark background
+            backgroundColor: '#141414',
             borderBottomWidth: 3,
-            borderBottomColor: '#333', // dark gray border
+            borderBottomColor: '#333',
           },
-          headerTintColor: '#ccc', // light gray text
+          headerTintColor: '#ccc',
           headerTitleStyle: {
             fontSize: 20,
             fontWeight: 'bold',
-            color: '#ccc', // light gray text
+            color: '#ccc',
           },
         }}
       />
@@ -116,21 +116,21 @@ const HomeTabs = () => {
                 style={{
                   width: 24,
                   height: 24,
-                  tintColor: focused ? '#E74C3C' : '#8B0A1A', // red shades
+                  tintColor: focused ? '#E74C3C' : '#8B0A1A',
                 }}
               />
             );
           },
           headerStyle: {
-            backgroundColor: '#141414', // dark background
+            backgroundColor: '#141414',
             borderBottomWidth: 1,
-            borderBottomColor: '#333', // dark gray border
+            borderBottomColor: '#333',
           },
-          headerTintColor: '#ccc', // light gray text
+          headerTintColor: '#ccc',
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: 'bold',
-            color: '#ccc', // light gray text
+            color: '#ccc',
           },
         }}
       />

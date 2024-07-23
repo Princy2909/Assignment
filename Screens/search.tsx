@@ -45,7 +45,7 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
   return (
     <View style={{
       flex: 1,
-      backgroundColor: '#141414', // dark background
+      backgroundColor: '#141414',
       padding: 20,
     }}>
       <View style={{
@@ -54,12 +54,12 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
         alignItems: 'center',
         padding: 10,
         borderBottomWidth: 3,
-        borderBottomColor: '#333', // dark gray border
+        borderBottomColor: '#333',
       }}>
         <Text style={{
           fontSize: 24,
           fontWeight: 'bold',
-          color: '#fff', // white text
+          color: '#fff',
         }}>
           Search Screen
         </Text>
@@ -71,12 +71,12 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
             flex: 1,
             padding: 10,
             borderWidth: 1,
-            borderColor: '#333', // dark gray border
+            borderColor: '#333',
             borderRadius: 15,
             height: 40,
             marginLeft: 5,
-            backgroundColor: '#eef0f2', // gray background
-            color: '#212529', // changed text color to a lighter shade of gray
+            backgroundColor: '#eef0f2',
+            color: '#212529',
           }}
         />
       </View>
@@ -84,7 +84,7 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
         <Text style={{
           fontSize: 24,
           fontWeight: 'bold',
-          color: '#fff', // white text
+          color: '#fff',
           textAlign: 'center',
         }}>
           Loading...
@@ -98,24 +98,24 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
                 <View style={{
                   flexDirection: 'row',
                   padding: 10,
-                  marginBottom: 20, // add some space between items
+                  marginBottom: 20,
                 }}>
                   {item.image && (
                     <View style={{
-                      backgroundColor: '#333', // dark gray background
-                      height: 120, // increase height to match Netflix style
-                      width: 80, // increase width to match Netflix style
+                      backgroundColor: '#333',
+                      height: 120,
+                      width: 80,
                       alignItems: 'center',
                       borderRadius: 15,
-                      marginRight: 20, // add some space between image and text
+                      marginRight: 20,
                     }}>
                       <Image
                         source={{ uri: item.image.medium }}
                         style={{
                           width: 70,
-                         height: 100, // increase height to match Netflix style
+                         height: 100,
                           marginTop: 10,
-                          borderRadius: 10, // add some rounded corners
+                          borderRadius: 10,
                         }}
                       />
                     </View>
@@ -127,15 +127,15 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
                     <Text style={{
                       fontSize: 18,
                       fontWeight: 'bold',
-                      color: '#fff', // white text
+                      color: '#fff',
                     }}>
                       {item.name}
                     </Text>
                     <Text style={{
                       fontSize: 14,
-                      color: '#ccc', // light gray text
-                      maxHeight: 70, // limit summary height
-                      overflow: 'hidden', // hide excess text
+                      color: '#ccc',
+                      maxHeight: 70,
+                      overflow: 'hidden',
                     }}>
                       {item.summary ? item.summary.substring(0, 100000) : ''}
                     </Text>

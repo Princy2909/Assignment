@@ -19,12 +19,12 @@ const DetailsScreen = ({ navigation, route }: Props) => {
   return (
     <ScrollView style={{
       flex: 1,
-      backgroundColor: '#141414', // dark background
+      backgroundColor: '#141414',
     }}>
       <View style={{
         flex: 1,
         padding: 20,
-        backgroundColor: '#141414', // dark background
+        backgroundColor: '#141414',
       }}>
         <TouchableOpacity style={{
           position: 'absolute',
@@ -34,7 +34,7 @@ const DetailsScreen = ({ navigation, route }: Props) => {
           <Image source={require('../assets/back.png')} style={{
             width: 30,
             height: 30,
-            tintColor: '#fff', // white icon
+            tintColor: '#fff',
           }} />
         </TouchableOpacity>
         <View style={{
@@ -48,7 +48,7 @@ const DetailsScreen = ({ navigation, route }: Props) => {
                 width: 200,
                 height: 280,
                 borderRadius: 10,
-                borderColor: '#333', // dark gray border
+                borderColor: '#333',
                 borderWidth: 1,
               }}
             />
@@ -56,14 +56,14 @@ const DetailsScreen = ({ navigation, route }: Props) => {
         </View>
         <View style={{
           padding: 20,
-          backgroundColor: '#333', // dark gray background
+          backgroundColor: '#333',
           borderRadius: 15,
         }}>
           {movie.name && (
             <Text style={{
               fontSize: 24,
               fontWeight: 'bold',
-              color: '#fff', // white text
+              color: '#fff',
               marginBottom: 10,
             }}>
               {movie.name}
@@ -72,7 +72,7 @@ const DetailsScreen = ({ navigation, route }: Props) => {
           {movie.summary && (
             <Text style={{
               fontSize: 18,
-              color: '#ccc', // light gray text
+              color: '#ccc',
               marginBottom: 10,
             }}>
               {movie.summary}
@@ -81,7 +81,7 @@ const DetailsScreen = ({ navigation, route }: Props) => {
           {movie.genres && (
             <Text style={{
               fontSize: 16,
-              color: '#ccc', // light gray text
+              color: '#ccc',
               marginBottom: 10,
             }}>
               Genre: {movie.genres.join(', ')}
@@ -90,7 +90,7 @@ const DetailsScreen = ({ navigation, route }: Props) => {
           {movie.rating && (
             <Text style={{
               fontSize: 16,
-              color: '#ccc', // light gray text
+              color: '#ccc',
               marginBottom: 10,
             }}>
               Rating: {movie.rating.average}
@@ -99,7 +99,7 @@ const DetailsScreen = ({ navigation, route }: Props) => {
           {movie.language && (
             <Text style={{
               fontSize: 16,
-              color: '#ccc', // light gray text
+              color: '#ccc',
               marginBottom: 10,
             }}>
               Language: {movie.language}
