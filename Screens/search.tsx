@@ -8,24 +8,26 @@ interface Props {
 }
 
 interface Item {
-  show: {
-    id: number;
-    name: string;
-    image: {
-      medium: string;
-    } | null;
-    summary: string;
-  };
+  id: number;
+  name: string;
+  image: {
+    medium: string;
+  } | null;
+  summary: string | null;
 }
 
 const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
   const [movies, setMovies] = useState<Item[]>([]);
   const [searchTerm, setSearchTerm] = useState(route.params? route.params.searchTerm : '');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios.get(`https://api.tvmaze.com/search/shows?q=${searchTerm}`)
      .then(response => {
-        setMovies(response.data);
+        const data = response.data.map((item: any) => item.show);
+        setMovies(data);
+        setLoading(false);
       })
      .catch(error => {
         console.error(error);
@@ -78,60 +80,73 @@ const SearchScreen: React.FC<Props> = ({ navigation, route }) => {
           }}
         />
       </View>
-      <FlatList
-        data={movies}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleMoviePress(item)}>
-            <View style={{
-              flexDirection: 'row',
-              padding: 10,
-              marginBottom: 20, // add some space between items
-            }}>
-              {item.show.image && (
+      {loading? (
+        <Text style={{
+          fontSize: 24,
+          fontWeight: 'bold',
+          color: '#fff', // white text
+          textAlign: 'center',
+        }}>
+          Loading...
+        </Text>
+      ) : (
+        <FlatList
+          data={movies}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity onPress={() => handleMoviePress(item)}>
                 <View style={{
-                  backgroundColor: '#333', // dark gray background
-                  height: 120, // increase height to match Netflix style
-                  width: 80, // increase width to match Netflix style
-                  alignItems: 'center',
-                  borderRadius: 15,
-                  marginRight: 20, // add some space between image and text
+                  flexDirection: 'row',
+                  padding: 10,
+                  marginBottom: 20, // add some space between items
                 }}>
-                  <Image
-                    source={{ uri: item.show.image.medium }}
-                    style={{
-                      width: 70,
-                      height: 100, // increase height to match Netflix style
-                      marginTop: 10,
-                      borderRadius: 10, // add some rounded corners
-                    }}
-                  />
-                </View>
-              )}
-              <View style={{
-                flex: 1,
-                padding: 10,
-              }}>
-                <Text style={{
-                  fontSize: 18,
-                  fontWeight: 'bold',
-                  color: '#fff', // white text
-                }}>
-                  {item.show.name}
-                </Text>
-                <Text style={{
+                  {item.image && (
+                    <View style={{
+                      backgroundColor: '#333', // dark gray background
+                      height: 120, // increase height to match Netflix style
+                      width: 80, // increase width to match Netflix style
+                      alignItems: 'center',
+                      borderRadius: 15,
+                      marginRight: 20, // add some space between image and text
+                    }}>
+                      <Image
+                        source={{ uri: item.image.medium }}
+                        style={{
+                          width: 70,
+                         height: 100, // increase height to match Netflix style
+                          marginTop: 10,
+                          borderRadius: 10, // add some rounded corners
+                        }}
+                      />
+                    </View>
+                  )}
+                  <View style={{
+                    flex: 1,
+                    padding: 10,
+                  }}>
+                    <Text style={{
+                      fontSize: 18,
+                      fontWeight: 'bold',
+                      color: '#fff', // white text
+                    }}>
+                      {item.name}
+                    </Text>
+                    <Text style={{
                       fontSize: 14,
                       color: '#ccc', // light gray text
                       maxHeight: 70, // limit summary height
                       overflow: 'hidden', // hide excess text
                     }}>
-                  {item.show.summary}
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.show.id.toString()}
-      />
+                      {item.summary ? item.summary.substring(0, 100000) : ''}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      )}
     </View>
   );
 };

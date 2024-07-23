@@ -41,12 +41,12 @@ const DetailsScreen = ({ navigation, route }: Props) => {
           alignItems: 'center',
           marginBottom: 20,
         }}>
-          {movie.show.image && (
+          {movie.image && (
             <Image
-              source={{ uri: movie.show.image.medium }}
+              source={{ uri: movie.image.medium }}
               style={{
                 width: 200,
-                height: 230,
+                height: 280,
                 borderRadius: 10,
                 borderColor: '#333', // dark gray border
                 borderWidth: 1,
@@ -59,50 +59,50 @@ const DetailsScreen = ({ navigation, route }: Props) => {
           backgroundColor: '#333', // dark gray background
           borderRadius: 15,
         }}>
-          {movie.show.name && (
+          {movie.name && (
             <Text style={{
               fontSize: 24,
               fontWeight: 'bold',
               color: '#fff', // white text
               marginBottom: 10,
             }}>
-              {movie.show.name}
+              {movie.name}
             </Text>
           )}
-          {movie.show.summary && (
+          {movie.summary && (
             <Text style={{
               fontSize: 18,
               color: '#ccc', // light gray text
               marginBottom: 10,
             }}>
-              {movie.show.summary}
+              {movie.summary}
             </Text>
           )}
-          {movie.show.genres && (
+          {movie.genres && (
             <Text style={{
               fontSize: 16,
               color: '#ccc', // light gray text
               marginBottom: 10,
             }}>
-              Genre: {movie.show.genres.join(', ')}
+              Genre: {movie.genres.join(', ')}
             </Text>
           )}
-          {movie.show.rating && (
+          {movie.rating && (
             <Text style={{
               fontSize: 16,
               color: '#ccc', // light gray text
               marginBottom: 10,
             }}>
-              Rating: {movie.show.rating.average}
+              Rating: {movie.rating.average}
             </Text>
           )}
-          {movie.show.language && (
+          {movie.language && (
             <Text style={{
               fontSize: 16,
               color: '#ccc', // light gray text
               marginBottom: 10,
             }}>
-              Language: {movie.show.language}
+              Language: {movie.language}
             </Text>
           )}
         </View>

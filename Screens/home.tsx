@@ -96,7 +96,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                       maxHeight: 70, // limit summary height
                       overflow: 'hidden', // hide excess text
                     }}>
-                      {item.summary.substring(0, 100)}... // show only first 100 characters
+                      {item.summary.substring(0, 100000)}
                     </Text>
                   </View>
                 </View>
